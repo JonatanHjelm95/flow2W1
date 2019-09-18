@@ -6,10 +6,14 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -25,10 +29,24 @@ public class Address implements Serializable {
     private Integer id;
     private String street;
     private String city;
+    @ManyToMany(mappedBy = "addresses")
+    private List<Customer> customers;
+
     public Address() {
     }
-    @OneToOne(mappedBy = "address")
-    private Customer customer;
+    
+    public void addToCustomers(Customer customer){
+        customers = new ArrayList();
+        customers.add(customer);
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
 
     public String getStreet() {
         return street;

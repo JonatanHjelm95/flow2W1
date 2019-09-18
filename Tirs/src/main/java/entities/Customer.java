@@ -17,7 +17,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -33,8 +36,9 @@ public class Customer implements Serializable {
     private Integer id;
     private String firstName;
     private String lastName;
-    @OneToOne
-    private Address address;  
+    @ManyToMany
+    private List<Address> addresses = new ArrayList();
+    
 
     public Customer() {
     }
@@ -52,7 +56,14 @@ public class Customer implements Serializable {
         this.lastName = lastName;
         this.hobbies = hobbies;
     }
+    public void addToAddresses(Address address){
+        addresses.add(address);
+    }
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+    
     public void addPhone(String number, String desc) {
         phones.put(number, desc);
     }
