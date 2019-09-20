@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import entities.Address;
 import entities.Person;
 import exceptions.PersonNotFoundException;
 import java.util.Date;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public interface IPersonFacade {
 
-    public Person addPerson(String fName, String lName, String phone, Date created);
+    public Person addPerson(String fName, String lName, String phone, Date created, Address address);
 
     public Person deletePerson(int id) throws PersonNotFoundException;
 

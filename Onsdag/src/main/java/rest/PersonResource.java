@@ -3,10 +3,12 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.PersonDTO;
+import entities.Address;
 import entities.Person;
 import exceptions.PersonNotFoundException;
 import utils.EMF_Creator;
 import facades.PersonFacade;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
@@ -44,6 +46,13 @@ public class PersonResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllMovies() {
         return GSON.toJson(FACADE.getAllPersons());
+    }
+    
+    @Path("populate")
+    @PUT
+    @Produces({MediaType.APPLICATION_JSON})
+    public void populate() {
+        FACADE.addPerson("Line", "Larsen", "123495", new Date(), new Address("Strandboulevarden", "København", "2100"));
     }
 
     /**

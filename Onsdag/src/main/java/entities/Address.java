@@ -8,69 +8,60 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Persons.getAll", query = "SELECT p FROM Person p"),
-    @NamedQuery(name = "Persons.deleteAllRows", query = "DELETE from Person")})
+//@NamedQueries({
+//    @NamedQuery(name = "Persons.getAll", query = "SELECT p FROM Person p"),
+//    @NamedQuery(name = "Persons.deleteAllRows", query = "DELETE from Person")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String firstName;
-    private String lastName;
-    private String phone;
-    @Temporal(TemporalType.DATE)
-    private Date created, lastEdited;
+    private String street;
+    private String city;
+    private String zip;
+    @OneToOne(mappedBy = "address")
+    private Person person;
 
     public Address() {
     }
 
-    public Address(String firstName, String lastName, String phone, Date created) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.created = created;
+    public Address(String street, String city, String zip) {
+        this.street = street;
+        this.city = city;
+        this.zip = zip;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getStreet() {
+        return street;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getCity() {
+        return city;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getZip() {
+        return zip;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
-    public Date getLastEdited() {
-        return lastEdited;
-    }
-
-    public void setLastEdited(Date lastEdited) {
-        this.lastEdited = lastEdited;
-    }
-
-        
     public int getId() {
         return id;
     }

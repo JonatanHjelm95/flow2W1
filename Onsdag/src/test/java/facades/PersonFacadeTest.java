@@ -12,13 +12,14 @@ import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import utils.Settings;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-//@Disabled
+@Disabled
 public class PersonFacadeTest {
 
     private static EntityManagerFactory emf;
@@ -39,9 +40,9 @@ public class PersonFacadeTest {
         facade = PersonFacade.getPersonFacade(emf);
 
         //setup variables
-        A = new Person("Hans", "Hansen", "111", new Date());
-        B = new Person("Lars", "Larsen", "222", new Date());
-        C = new Person("Ib", "Ibsen", "333", new Date());
+//        A = new Person("Hans", "Hansen", "111", new Date());
+//        B = new Person("Lars", "Larsen", "222", new Date());
+//        C = new Person("Ib", "Ibsen", "333", new Date());
 
     }
     

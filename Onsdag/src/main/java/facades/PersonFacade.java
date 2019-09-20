@@ -1,6 +1,7 @@
 package facades;
 
 import dto.PersonDTO;
+import entities.Address;
 import entities.Person;
 import exceptions.PersonNotFoundException;
 import interfaces.IPersonFacade;
@@ -43,12 +44,13 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public Person addPerson(String fName, String lName, String phone, Date created) {
+    public Person addPerson(String fName, String lName, String phone, Date created, Address address) {
         EntityManager em = emf.createEntityManager();
-        Person p = new Person(fName, lName, phone, created);
+        Person p = new Person(fName, lName, phone, created, address);
         try {
             em.getTransaction().begin();
             em.persist(p);
+            em.persist(address);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -64,8 +66,11 @@ public class PersonFacade implements IPersonFacade {
             try {
                 em.getTransaction().begin();
                 TypedQuery<Person> query = em.createQuery("DELETE FROM Person p WHERE p.id = :id", Person.class);
+                TypedQuery<Address> query2 = em.createQuery("DELETE FROM Address a WHERE a.id = :id", Address.class);
                 query.setParameter("id", id);
+                query2.setParameter("id", p.getAddress().getId());
                 query.executeUpdate();
+                query2.executeUpdate();
                 em.getTransaction().commit();
             } finally {
                 em.close();
@@ -131,8 +136,8 @@ public class PersonFacade implements IPersonFacade {
 
     public static void main(String[] args) {
         PersonFacade pf = getPersonFacade(EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.DROP_AND_CREATE));
-        Person p = pf.addPerson("Line", "Larsen", "123495", new Date());
-        Person p1 = pf.addPerson("Lars", "Larsen", "11111", new Date());
+        Person p = pf.addPerson("Line", "Larsen", "123495", new Date(), new Address("Strandboulevarden", "København", "2100"));
+        //Person p1 = pf.addPerson("Lars", "Larsen", "11111", new Date(), new Address("Strandboulevarden", "København", "2100"));
 
     }
 }

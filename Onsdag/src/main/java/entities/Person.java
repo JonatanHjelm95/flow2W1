@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -27,15 +28,22 @@ public class Person implements Serializable {
     private String phone;
     @Temporal(TemporalType.DATE)
     private Date created, lastEdited;
+    @OneToOne
+    private Address address;
 
     public Person() {
     }
 
-    public Person(String firstName, String lastName, String phone, Date created) {
+    public Person(String firstName, String lastName, String phone, Date created, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.created = created;
+        this.address = address;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     public String getFirstName() {
