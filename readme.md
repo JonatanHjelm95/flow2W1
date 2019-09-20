@@ -7,7 +7,9 @@ tilføjet en Customer i Address-enititeten.
 ManyToMany -bidirectional: Der laves en foreignKey -> Customer_ID i address-tabellen. Desuden bliver der 
 også genereret en liste af Customers i address-entiteten.
 
-Onsdag: Fik løst de fleste opgaver. 
+Onsdag/Torsdag: Fik løst de fleste opgaver. 
 Har benyttet PUT til edit/delete endpoints. Delete virker fint, men edit giver en nullpointer og jeg 
 orker ikke at kigge mere på den. Endpoints er testet via POSTMAN.
-Har tilføjet en ny branch til sidste del af opgaven.
+Har ikke lavet nogle tests, udover nogle småting i facadeTest.
+
+Har tilføjet en ny branch (Part2) til sidste del af opgaven.
